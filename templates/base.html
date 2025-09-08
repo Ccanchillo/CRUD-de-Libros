@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Librería Online - Tu mundo de libros{% endblock %}</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- CSS personalizado -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/modern-style.css' %}">
+    
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <!-- Navegación -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="{% url 'books_list' %}" class="logo">
+                <i class="fas fa-book-open"></i>
+                <span>BookStore</span>
+            </a>
+
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="{% url 'books_list' %}" class="nav-link">Libros</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <a href="/admin/" class="btn btn-outline">Admin</a>
+            </div>
+
+            <button class="mobile-toggle" id="mobile-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Notificaciones -->
+    {% if messages %}
+        <div class="notifications-container">
+            {% for message in messages %}
+                <div class="notification notification-{{ message.tags }}">
+                    <div class="notification-content">
+                        <i class="fas fa-check-circle"></i>
+                        <span>{{ message }}</span>
+                    </div>
+                    <button class="notification-close" onclick="closeNotification(this)">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <!-- Contenido principal -->
+    <main class="main-content">
+        {% block content %}
+        <!-- Contenido por defecto - Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">
+                        Descubre tu próxima
+                        <span class="text-gradient">gran lectura</span>
+                    </h1>
+                    <p class="hero-description">
+                        Explora miles de libros, desde bestsellers hasta joyas ocultas. 
+                        Encuentra historias que transformarán tu mundo.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="{% url 'lista_productos' %}" class="btn btn-primary btn-lg">
+                            <i class="fas fa-search"></i>
+                            Explorar Catálogo
+                        </a>
+                        <a href="#featured" class="btn btn-outline btn-lg">
+                            <i class="fas fa-star"></i>
+                            Ver Destacados
+                        </a>
+                    </div>
+                    
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <div class="stat-number">10K+</div>
+                            <div class="stat-label">Libros</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">5K+</div>
+                            <div class="stat-label">Clientes</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">98%</div>
+                            <div class="stat-label">Satisfacción</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-visual">
+                    <div class="book-stack">
+                        <div class="book book-1">
+                            <i class="fas fa-dragon" style="color: white;"></i>
+                        </div>
+                        <div class="book book-2">
+                            <i class="fas fa-rocket" style="color: white;"></i>
+                        </div>
+                        <div class="book book-3">
+                            <i class="fas fa-heart" style="color: white;"></i>
+                        </div>
+                        <div class="book book-4">
+                            <i class="fas fa-magic" style="color: white;"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="floating-elements">
+                        <div class="floating-star"><i class="fas fa-star"></i></div>
+                        <div class="floating-star"><i class="fas fa-star"></i></div>
+                        <div class="floating-star"><i class="fas fa-star"></i></div>
+                        <div class="floating-bookmark"><i class="fas fa-bookmark"></i></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de características -->
+        <section class="features" id="features">
+            <div class="container">
+                <div class="section-header">
+                    <h2>¿Por qué elegirnos?</h2>
+                    <p>Ofrecemos la mejor experiencia en compra de libros online</p>
+                </div>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-shipping-fast"></i>
+                        </div>
+                        <h3>Envío Rápido</h3>
+                        <p>Recibe tus libros en 24-48 horas en toda la ciudad</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Compra Segura</h3>
+                        <p>Tus datos y pagos están protegidos con la mejor seguridad</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-undo"></i>
+                        </div>
+                        <h3>Devolución Fácil</h3>
+                        <p>30 días para devolver cualquier libro sin preguntas</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h3>Soporte 24/7</h3>
+                        <p>Nuestro equipo está siempre disponible para ayudarte</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% endblock %}
+    </main>
+
+    <!-- Pie de página -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-book-open"></i>
+                        <span>BookStore</span>
+                    </div>
+                    <p>Tu librería online de confianza. Descubre, compra y disfruta de los mejores libros.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Explorar</h4>
+                    <ul>
+                        <li><a href="#">Nuevos Lanzamientos</a></li>
+                        <li><a href="#">Bestsellers</a></li>
+                        <li><a href="#">Ofertas</a></li>
+                        <li><a href="#">Recomendados</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Géneros</h4>
+                    <ul>
+                        <li><a href="#">Ficción</a></li>
+                        <li><a href="#">No Ficción</a></li>
+                        <li><a href="#">Misterio</a></li>
+                        <li><a href="#">Romance</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Ayuda</h4>
+                    <ul>
+                        <li><a href="#">Centro de Ayuda</a></li>
+                        <li><a href="#">Contacto</a></li>
+                        <li><a href="#">Términos de Uso</a></li>
+                        <li><a href="#">Política de Privacidad</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 BookStore. Todos los derechos reservados.</p>
+                <div class="payment-methods">
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fab fa-cc-mastercard"></i>
+                    <i class="fab fa-cc-paypal"></i>
+                    <i class="fab fa-cc-apple-pay"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const navMenu = document.getElementById('nav-menu');
+            const mobileToggle = document.getElementById('mobile-toggle');
+            navMenu.classList.toggle('active');
+            mobileToggle.classList.toggle('active');
+        }
+
+        // User menu toggle
+        function toggleUserMenu() {
+            const userDropdown = document.getElementById('user-dropdown');
+            userDropdown.classList.toggle('active');
+        }
+
+        // Close notification
+        function closeNotification(btn) {
+            const notification = btn.parentElement;
+            notification.style.animation = 'slideOut 0.3s ease forwards';
+            setTimeout(() => {
+                notification.remove();
+            }, 300);
+        }
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!event.target.closest('.user-menu')) {
+                document.getElementById('user-dropdown')?.classList.remove('active');
+            }
+        });
+
+        // Mobile toggle event
+        document.getElementById('mobile-toggle')?.addEventListener('click', toggleMobileMenu);
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+    
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
