@@ -1,0 +1,262 @@
+/* ===== VARIABLES CSS (CYBERPUNK THEME) ===== */
+:root {
+    --bg-dark: #121212;
+    --bg-light: #1e1e1e;
+    --neon-blue: #0ff;
+    --neon-pink: #f0f;
+    --neon-green: #0f0;
+    --neon-yellow: #ff0;
+    --text-primary: #e0e0e0;
+    --text-secondary: #a0a0a0;
+    --border-neon: 1px solid var(--neon-blue);
+    --shadow-neon: 0 0 5px var(--neon-blue), 0 0 10px var(--neon-blue), 0 0 15px var(--neon-blue);
+    --font-mono: 'Space Mono', 'Courier New', monospace;
+    --font-heading: 'Michroma', sans-serif;
+    --transition-fast: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --glitch-speed: 0.1s;
+}
+
+/* ===== RESET & BASE ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-mono);
+    line-height: 1.5;
+    color: var(--text-primary);
+    background: var(--bg-dark);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: var(--neon-blue);
+    text-shadow: var(--shadow-neon);
+    transition: var(--transition-fast);
+}
+
+a:hover {
+    color: var(--neon-pink);
+    text-shadow: 0 0 5px var(--neon-pink), 0 0 10px var(--neon-pink);
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    background: none;
+    color: inherit;
+    font-family: inherit;
+}
+
+/* ===== UTILITIES ===== */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.text-glitch {
+    font-family: var(--font-heading);
+    text-transform: uppercase;
+    position: relative;
+    animation: glitch-anim 2s infinite linear alternate-reverse;
+}
+
+.text-glitch::before, .text-glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.text-glitch::before {
+    left: 2px;
+    text-shadow: -2px 0 var(--neon-pink);
+    animation: glitch-anim-before var(--glitch-speed) infinite linear alternate-reverse;
+}
+
+.text-glitch::after {
+    left: -2px;
+    text-shadow: -2px 0 var(--neon-blue);
+    animation: glitch-anim-after var(--glitch-speed) infinite linear alternate-reverse;
+}
+
+/* ===== BUTTONS ===== */
+.btn {
+    display: inline-block;
+    padding: 0.75rem 2rem;
+    border: var(--border-neon);
+    background-color: transparent;
+    color: var(--neon-blue);
+    text-shadow: var(--shadow-neon);
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    position: relative;
+    overflow: hidden;
+    transition: var(--transition-fast);
+    box-shadow: 0 0 5px var(--neon-blue);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.btn:hover {
+    background-color: var(--neon-blue);
+    color: var(--bg-dark);
+    text-shadow: none;
+    box-shadow: 0 0 10px var(--neon-blue);
+}
+
+.btn-ghost {
+    background-color: transparent;
+    border: none;
+    color: var(--neon-pink);
+    text-shadow: 0 0 5px var(--neon-pink);
+}
+
+.btn-ghost:hover {
+    background-color: transparent;
+    color: var(--neon-yellow);
+    text-shadow: 0 0 5px var(--neon-yellow);
+}
+
+/* ===== HEADER ===== */
+.header {
+    background: var(--bg-light);
+    border-bottom: var(--border-neon);
+    padding: 1rem 0;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    color: var(--neon-pink);
+    text-shadow: 0 0 5px var(--neon-pink);
+    letter-spacing: 2px;
+}
+
+.nav-menu {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-link {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    position: relative;
+}
+
+.nav-link::before {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--neon-blue);
+    transition: width 0.3s;
+}
+
+.nav-link:hover::before {
+    width: 100%;
+}
+
+/* ===== HERO SECTION ===== */
+.hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--bg-dark) 0%, #080808 100%);
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path fill="%231a1a1a" d="M0 0h16v16H0z"/><path d="M0 0h1v16H0zM15 0h1v16h-1zM0 0h16v1H0zM0 15h16v1H0zM8 0v16h1V0zM0 8h16v1H0z" fill="%232e2e2e"/></svg>') repeat;
+    opacity: 0.5;
+    z-index: 0;
+    animation: grain 8s steps(10) infinite;
+}
+
+.hero-content {
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.hero-title {
+    font-family: var(--font-heading);
+    font-size: 4rem;
+    text-transform: uppercase;
+    color: var(--neon-green);
+    text-shadow: 0 0 10px var(--neon-green), 0 0 20px var(--neon-green), 0 0 30px var(--neon-green);
+    margin-bottom: 1rem;
+    letter-spacing: 4px;
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes glitch-anim {
+    0% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(-2px, -2px); }
+    60% { transform: translate(2px, 2px); }
+    80% { transform: translate(2px, -2px); }
+    100% { transform: translate(0); }
+}
+
+@keyframes glitch-anim-before {
+    0% { clip-path: inset(45% 0 35% 0); }
+    20% { clip-path: inset(55% 0 25% 0); }
+    40% { clip-path: inset(25% 0 65% 0); }
+    60% { clip-path: inset(75% 0 15% 0); }
+    80% { clip-path: inset(85% 0 5% 0); }
+    100% { clip-path: inset(45% 0 35% 0); }
+}
+
+@keyframes glitch-anim-after {
+    0% { clip-path: inset(65% 0 25% 0); }
+    20% { clip-path: inset(15% 0 75% 0); }
+    40% { clip-path: inset(55% 0 35% 0); }
+    60% { clip-path: inset(5% 0 85% 0); }
+    80% { clip-path: inset(35% 0 45% 0); }
+    100% { clip-path: inset(65% 0 25% 0); }
+}
+
+@keyframes grain {
+    0%, 100% { transform: translate(0, 0); }
+    10% { transform: translate(-5%, -10%); }
+    30% { transform: translate(5%, 10%); }
+    50% { transform: translate(-10%, 5%); }
+    70% { transform: translate(10%, -5%); }
+    90% { transform: translate(-5%, -5%); }
+}
